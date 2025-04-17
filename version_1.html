@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品管理系统</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* 页面容器 */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 顶部导航栏 */
+        .header {
+            background: #ffffff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* 侧边导航菜单 */
+        .sidebar {
+            width: 180px;
+            background: #f8f9fa;
+            padding: 2rem 1rem;
+            border-right: 1px solid #dee2e6;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 1rem 0;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #e9ecef;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #2c3e50;
+            display: block;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #ffffff;
+        }
+
+        /* 产品卡片布局 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .product-info {
+            margin-bottom: 1rem;
+        }
+
+        .product-specs {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .product-price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .product-stock {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* 分页控件 */
+        .pagination {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .page-item {
+            padding: 0.5rem 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .page-item.active {
+            background: #27ae60;
+            color: white;
+        }
+
+        /* 搜索栏 */
+        .search-box {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 侧边菜单 -->
+        <nav class="sidebar">
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link">首页</a></li>
+                <li class="nav-item active"><a href="#" class="nav-link">价格</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">订单</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">仓库</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">后续添加...</a></li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="main-content" id="main-content">
+            <!-- 搜索功能 -->
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="输入规格搜索..." id="search-input">
+            </div>
+
+            <!-- 产品卡片 -->
+            <div class="products-grid" id="products-grid">
+                <!-- 示例产品卡片（可循环生成） -->
+                <div class="product-card">
+                    <img src="/picture/logo1.png" alt="产品图片" class="product-image">
+                    <div class="product-info">
+                        <div class="product-specs">规格：14x2.6x4</div>
+                        <div class="product-price">价格：0.008元</div>
+                        <div class="product-stock">库存：<span class="stock-value">0</span>个</div>
+                    </div>
+                    <button class="add-btn">+ 加入订单</button>
+                    <button class="modify-btn">修改库存</button>
+                    <button class="in-btn">入库</button>
+                    <button class="out-btn">出库</button>
+                </div>
+                <!-- 重复7次相同结构... -->
+                <!-- 示例产品卡片（可循环生成） -->
+                <div class="product-card">
+                    <img src="/picture/jiaozai.png" alt="产品图片" class="product-image">
+                    <div class="product-info">
+                        <div class="product-specs">规格：16x2.6x4</div>
+                        <div class="product-price">价格：0.008元</div>
+                        <div class="product-stock">库存：<span class="stock-value">0</span>个</div>
+                    </div>
+                    <button class="add-btn">+ 加入订单</button>
+                    <button class="modify-btn">修改库存</button>
+                    <button class="in-btn">入库</button>
+                    <button class="out-btn">出库</button>
+                </div>
+                <!-- 其他产品卡片... -->
+                <!-- 新增产品卡片 -->
+                <div class="product-card">
+                    <img src="/picture/jiaozai.png" alt="产品图片" class="product-image">
+                    <div class="product-info">
+                        <div class="product-specs">规格：18x2.6x4</div>
+                        <div class="product-price">价格：0.009元</div>
+                        <div class="product-stock">库存：<span class="stock-value">0</span>个</div>
+                    </div>
+                    <button class="add-btn">+ 加入订单</button>
+                    <button class="modify-btn">修改库存</button>
+                    <button class="in-btn">入库</button>
+                    <button class="out-btn">出库</button>
+                </div>
+                <div class="product-card">
+                    <img src="/picture/jiaozai.png" alt="产品图片" class="product-image">
+                    <div class="product-info">
+                        <div class="product-specs">规格：20x2.6x4</div>
+                        <div class="product-price">价格：0.010元</div>
+                        <div class="product-stock">库存：<span class="stock-value">0</span>个</div>
+                    </div>
+                    <button class="add-btn">+ 加入订单</button>
+                    <button class="modify-btn">修改库存</button>
+                    <button class="in-btn">入库</button>
+                    <button class="out-btn">出库</button>
+                </div>
+                <div class="product-card">
+                    <img src="/picture/jiaozai.png" alt="产品图片" class="product-image">
+                    <div class="product-info">
+                        <div class="product-specs">规格：20x2.6x4</div>
+                        <div class="product-price">价格：0.010元</div>
+                        <div class="product-stock">库存：<span class="stock-value">0</span>个</div>
+                    </div>
+                    <button class="add-btn">+ 加入订单</button>
+                    <button class="modify-btn">修改库存</button>
+                    <button class="in-btn">入库</button>
+                    <button class="out-btn">出库</button>
+                </div>
+            </div>
+
+            <!-- 分页控件 -->
+            <div class="pagination" id="pagination">
+                <div class="page-item">1</div>
+                <div class="page-item active">2</div>
+                <div class="page-item">3</div>
+                <div class="page-item">4</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const products = document.querySelectorAll('.product-card');
+        const productsPerPage = 4;
+        let currentPage = 1;
+
+        // 初始化库存数据
+        products.forEach(product => {
+            const specs = product.querySelector('.product-specs').textContent;
+            const stockValue = product.querySelector('.stock-value');
+            const stock = JSON.parse(localStorage.getItem(specs)) || 0;
+            stockValue.textContent = stock;
+        });
+
+        document.getElementById('search-input').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredProducts = Array.from(products).filter(product => {
+                const specs = product.querySelector('.product-specs').textContent.toLowerCase();
+                return specs.includes(query);
+            });
+
+            filteredProducts.forEach((product, index) => {
+                product.style.display = 'block';
+            });
+
+            products.forEach(product => {
+                if (!filteredProducts.includes(product)) {
+                    product.style.display = 'none';
+                }
+            });
+
+            const pages = Math.ceil(filteredProducts.length / productsPerPage);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            for (let i = 1; i <= pages; i++) {
+                const pageItem = document.createElement('div');
+                pageItem.className = 'page-item';
+                pageItem.textContent = i;
+                pageItem.addEventListener('click', () => {
+                    currentPage = i;
+                    showPage(currentPage, filteredProducts);
+                });
+                if (i === currentPage) {
+                    pageItem.classList.add('active');
+                }
+                pagination.appendChild(pageItem);
+            }
+
+            showPage(currentPage, filteredProducts);
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                const mainContent = document.getElementById('main-content');
+                if (this.textContent.trim() === '价格') {
+                    mainContent.style.display = 'block';
+                } else {
+                    mainContent.style.display = 'none';
+                }
+            });
+        });
+
+        function showPage(page, productList = products) {
+            const start = (page - 1) * productsPerPage;
+            const end = start + productsPerPage;
+
+            productList.forEach((product, index) => {
+                if (index >= start && index < end) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            const pages = Math.ceil(productList.length / productsPerPage);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            for (let i = 1; i <= pages; i++) {
+                const pageItem = document.createElement('div');
+                pageItem.className = 'page-item';
+                pageItem.textContent = i;
+                pageItem.addEventListener('click', () => {
+                    currentPage = i;
+                    showPage(currentPage, productList);
+                });
+                if (i === currentPage) {
+                    pageItem.classList.add('active');
+                }
+                pagination.appendChild(pageItem);
+            }
+        }
+
+        showPage(currentPage);
+
+        // 库存操作
+        products.forEach(product => {
+            const specs = product.querySelector('.product-specs').textContent;
+            const stockValue = product.querySelector('.stock-value');
+            const inBtn = product.querySelector('.in-btn');
+            const outBtn = product.querySelector('.out-btn');
+            const modifyBtn = product.querySelector('.modify-btn');
+
+            // 入库操作
+            inBtn.addEventListener('click', () => {
+                const quantity = prompt('请输入入库数量:', '1');
+                if (quantity !== null) {
+                    let stock = JSON.parse(localStorage.getItem(specs)) || 0;
+                    const quantityInt = parseInt(quantity, 10);
+                    if (!isNaN(quantityInt) && quantityInt > 0) {
+                        const confirmAction = confirm(`确认要入库 ${quantityInt} 个吗？`);
+                        if (confirmAction) {
+                            stock += quantityInt;
+                            localStorage.setItem(specs, JSON.stringify(stock));
+                            stockValue.textContent = stock;
+                        }
+                    } else {
+                        alert('请输入有效的库存数量');
+                    }
+                }
+            });
+
+            // 出库操作
+            outBtn.addEventListener('click', () => {
+                const quantity = prompt('请输入出库数量:', '1');
+                if (quantity !== null) {
+                    let stock = JSON.parse(localStorage.getItem(specs)) || 0;
+                    const quantityInt = parseInt(quantity, 10);
+                    if (!isNaN(quantityInt) && quantityInt > 0 && stock >= quantityInt) {
+                        const confirmAction = confirm(`确认要出库 ${quantityInt} 个吗？`);
+                        if (confirmAction) {
+                            stock -= quantityInt;
+                            localStorage.setItem(specs, JSON.stringify(stock));
+                            stockValue.textContent = stock;
+                        }
+                    } else {
+                        alert('请输入有效的库存数量或确保库存足够');
+                    }
+                }
+            });
+
+            // 修改库存操作
+            modifyBtn.addEventListener('click', () => {
+                const newStock = prompt(`请输入新的库存数量（当前库存: ${stockValue.textContent}）`, stockValue.textContent);
+                if (newStock !== null) {
+                    let stock = parseInt(newStock, 10);
+                    if (!isNaN(stock)) {
+                        const confirmAction = confirm(`确认要修改库存为 ${stock} 个吗？`);
+                        if (confirmAction) {
+                            localStorage.setItem(specs, JSON.stringify(stock));
+                            stockValue.textContent = stock;
+                            alert(`库存已成功修改为 ${stock} 个`);
+                        }
+                    } else {
+                        alert('请输入有效的库存数量');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
